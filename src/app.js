@@ -8,12 +8,33 @@ var HelloWorldLayer = cc.Layer.extend({
     jugadaB:[0,0,0],
     jugadaC:[0,0,0],
     turnos: 0,
+    boton:null,
     fin: false,
     jugar: function (location, event){
         
         var ubicacion = location.getLocation();
         var juego = event.getCurrentTarget();
         var sejugo = false;
+        
+        var cuadro1 = juego.boton.getBoundingBox();
+        if(cc.rectContainsPoint(cuadro1, ubicacion)){
+                    juego.turnos = 0;
+                    juego.jugadaA = [0,0,0];
+                    juego.jugadaB = [0,0,0];
+                    juego.jugadaC = [0,0,0];
+                    juego.fin = false;
+                    
+            for(var i = 0; i < 3; i++){
+                juego.lineaA[i].setVisible(false);
+            }
+            for(var i = 0; i < 3; i++){
+                juego.lineaB[i].setVisible(false);
+            }
+            for(var i = 0; i < 3; i++){
+                juego.lineaC[i].setVisible(false);
+            }
+            // comentario antiPlagio- SI TE HABLO A TI MANSILLA -___-
+        }
         
         if(!juego.fin){
         for(var i = 0; i < 3; i++){
@@ -23,77 +44,83 @@ var HelloWorldLayer = cc.Layer.extend({
                     var sprite = juego.lineaA[i];
                     juego.removeChild(juego.lineaA[i],1);
                     juego.lineaA[i] = new cc.Sprite(res.X_png);
-                    if(i === 0){
+                    juego.jugadaA[i] = 2;
+                }else{
+                    var sprite = juego.lineaA[i];
+                    juego.removeChild(juego.lineaA[i],1);
+                    juego.lineaA[i] = new cc.Sprite(res.O_png);
+                    juego.jugadaA[i] = 1;
+                }
+                 if(i === 0){
                         juego.lineaA[i].setPosition(355, 480);
                     }else if (i === 1){
                         juego.lineaA[i].setPosition(480, 480);
                     }else{
                         juego.lineaA[i].setPosition(610, 480);
                     }
-                    juego.jugadaA[i] = 2;
-                    juego.lineaA[i].setScale(0.15, 0.15);
-                    juego.lineaA[i].setVisible(false);
-                    juego.addChild(juego.lineaA[i],1);
-                }else{
-                    juego.jugadaA[i] = 1;
-                }
+                juego.addChild(juego.lineaA[i],1);
                 juego.lineaA[i].setVisible(true);
                 juego.turnos++;
                 sejugo = true;
+                 // comentario antiPlagio- SI TE HABLO A TI MANSILLA -___-
              }
         }   
         
         for(var i = 0; i < 3; i++){
            var cuadro = juego.lineaB[i].getBoundingBox();
-            if(cc.rectContainsPoint(cuadro, ubicacion)&& juego.jugadaB[i]===0){
-                  if(juego.turnos%2===1){
+                         if(cc.rectContainsPoint(cuadro, ubicacion) && juego.jugadaB[i]===0){
+                 if(juego.turnos%2===1){
                     var sprite = juego.lineaB[i];
                     juego.removeChild(juego.lineaB[i],1);
                     juego.lineaB[i] = new cc.Sprite(res.X_png);
-                    if(i === 0){
+                    juego.jugadaB[i] = 2;
+                }else{
+                    var sprite = juego.lineaB[i];
+                    juego.removeChild(juego.lineaB[i],1);
+                    juego.lineaB[i] = new cc.Sprite(res.O_png);
+                    juego.jugadaB[i] = 1;
+                }
+                 if(i === 0){
                         juego.lineaB[i].setPosition(355, 350);
                     }else if (i === 1){
                         juego.lineaB[i].setPosition(480, 350);
                     }else{
                         juego.lineaB[i].setPosition(610, 350);
                     }
-                    juego.jugadaB[i] = 2;
-                    juego.lineaB[i].setScale(0.15, 0.15);
-                    juego.lineaB[i].setVisible(false);
-                    juego.addChild(juego.lineaB[i],1);
-                }else{
-                    juego.jugadaB[i] = 1;
-                }
+                juego.addChild(juego.lineaB[i],1);
                 juego.lineaB[i].setVisible(true);
                 juego.turnos++;
                 sejugo = true;
+                // comentario antiPlagio- SI TE HABLO A TI MANSILLA -___-
             }
         }
         
         for(var i = 0; i < 3; i++){
            var cuadro = juego.lineaC[i].getBoundingBox();
-            if(cc.rectContainsPoint(cuadro, ubicacion)&& juego.jugadaC[i]===0){
-                if(juego.turnos%2===1){
+             if(cc.rectContainsPoint(cuadro, ubicacion) && juego.jugadaC[i]===0){
+                 if(juego.turnos%2===1){
                     var sprite = juego.lineaC[i];
                     juego.removeChild(juego.lineaC[i],1);
                     juego.lineaC[i] = new cc.Sprite(res.X_png);
-                    if(i === 0){
+                    juego.jugadaC[i] = 2;
+                }else{
+                    var sprite = juego.lineaC[i];
+                    juego.removeChild(juego.lineaC[i],1);
+                    juego.lineaC[i] = new cc.Sprite(res.O_png);
+                    juego.jugadaC[i] = 1;
+                }
+                 if(i === 0){
                         juego.lineaC[i].setPosition(355, 230);
                     }else if (i === 1){
                         juego.lineaC[i].setPosition(480, 230);
                     }else{
                         juego.lineaC[i].setPosition(610, 230);
                     }
-                    juego.jugadaC[i] = 2;
-                    juego.lineaC[i].setScale(0.15, 0.15);
-                    juego.lineaC[i].setVisible(false);
-                    juego.addChild(juego.lineaC[i],1);
-                }else{
-                    juego.jugadaC[i] = 1;
-                }
+                juego.addChild(juego.lineaC[i],1);
                 juego.lineaC[i].setVisible(true);
                 juego.turnos++;
                 sejugo = true;
+                // comentario antiPlagio- SI TE HABLO A TI MANSILLA -___-
             }
         }
         console.log("Turno No.: "+juego.turnos);  
@@ -174,69 +201,7 @@ var HelloWorldLayer = cc.Layer.extend({
             }
 
         }
-        /*
-        var cuadro = this.boton.getBoundingBox();
-        if(cc.rectContainsPoint(cuadro, ubicacion)){
-            juego.turnos = 0;
-            juego.jugadaA = [0,0,0];
-            juego.jugadaB = [0,0,0];
-            juego.jugadaC = [0,0,0];
-            
-        juego.lineaA[0] = new cc.Sprite(res.O_png);
-        juego.lineaA[0].setPosition(355,480);
-        juego.lineaA[0].setScale(0.15, 0.15);
-        juego.addChild(this.lineaA[0], 1);
-        juego.lineaA[0].setVisible(false);
         
-        juego.lineaA[1] = new cc.Sprite(res.O_png);
-       juego.lineaA[1].setPosition(480, 480);
-       juego.lineaA[1].setScale(0.15, 0.15);
-		 juego.addChild(this.lineaA[1], 1);
-        juego.lineaA[1].setVisible(false);
-        
-         juego.lineaA[2] = new cc.Sprite(res.O_png);
-         juego.lineaA[2].setPosition(610, 480);
-         juego.lineaA[2].setScale(0.15, 0.15);
-		 juego.addChild(this.lineaA[2], 1);
-         juego.lineaA[2].setVisible(false);
-        //------------------------------------------------------------------------
-         juego.lineaB[0] = new cc.Sprite(res.O_png);
-         juego.lineaB[0].setPosition(355,350);
-         juego.lineaB[0].setScale(0.15, 0.15);
-		 juego.addChild(this.lineaB[0], 1);
-         juego.lineaB[0].setVisible(false);
-        
-         juego.lineaB[1] = new cc.Sprite(res.O_png);
-        juego.lineaB[1].setPosition(480, 350);
-         juego.lineaB[1].setScale(0.15, 0.15);
-		 juego.addChild(this.lineaB[1], 1);
-        juego.lineaB[1].setVisible(false);
-        
-        juego.lineaB[2] = new cc.Sprite(res.O_png);
-         juego.lineaB[2].setPosition(610, 350);
-        juego.lineaB[2].setScale(0.15, 0.15);
-		 juego.addChild(this.lineaB[2], 1);
-        juego.lineaB[2].setVisible(false);
-        //------------------------------------------------------------------------
-        juego.lineaC[0] = new cc.Sprite(res.O_png);
-         juego.lineaC[0].setPosition(355,230);
-         juego.lineaC[0].setScale(0.15, 0.15);
-		 juego.addChild(this.lineaC[0], 1);
-         juego.lineaC[0].setVisible(false);
-        
-         juego.lineaC[1] = new cc.Sprite(res.O_png);
-         juego.lineaC[1].setPosition(480, 230);
-         juego.lineaC[1].setScale(0.15, 0.15);
-		 juego.addChild(this.lineaC[1], 1);
-        juego.lineaC[1].setVisible(false);
-        
-        juego.lineaC[2] = new cc.Sprite(res.O_png);
-        juego.lineaC[2].setPosition(610, 230);
-        juego.lineaC[2].setScale(0.15, 0.15);
-        juego.addChild(this.lineaC[2], 1);
-        juego.lineaC[2].setVisible(false);
-        }
-        */
         return true;
     },
     ctor:function () {
@@ -267,61 +232,52 @@ var HelloWorldLayer = cc.Layer.extend({
         //======================================================================
         this.lineaA[0] = new cc.Sprite(res.O_png);
         this.lineaA[0].setPosition(355,480);
-        this.lineaA[0].setScale(0.15, 0.15);
 		this.addChild(this.lineaA[0], 1);
         this.lineaA[0].setVisible(false);
         
         this.lineaA[1] = new cc.Sprite(res.O_png);
         this.lineaA[1].setPosition(480, 480);
-        this.lineaA[1].setScale(0.15, 0.15);
 		this.addChild(this.lineaA[1], 1);
         this.lineaA[1].setVisible(false);
         
         this.lineaA[2] = new cc.Sprite(res.O_png);
         this.lineaA[2].setPosition(610, 480);
-        this.lineaA[2].setScale(0.15, 0.15);
 		this.addChild(this.lineaA[2], 1);
         this.lineaA[2].setVisible(false);
         //------------------------------------------------------------------------
         this.lineaB[0] = new cc.Sprite(res.O_png);
         this.lineaB[0].setPosition(355,350);
-        this.lineaB[0].setScale(0.15, 0.15);
 		this.addChild(this.lineaB[0], 1);
         this.lineaB[0].setVisible(false);
         
         this.lineaB[1] = new cc.Sprite(res.O_png);
         this.lineaB[1].setPosition(480, 350);
-        this.lineaB[1].setScale(0.15, 0.15);
 		this.addChild(this.lineaB[1], 1);
         this.lineaB[1].setVisible(false);
         
         this.lineaB[2] = new cc.Sprite(res.O_png);
         this.lineaB[2].setPosition(610, 350);
-        this.lineaB[2].setScale(0.15, 0.15);
 		this.addChild(this.lineaB[2], 1);
         this.lineaB[2].setVisible(false);
         //------------------------------------------------------------------------
         this.lineaC[0] = new cc.Sprite(res.O_png);
         this.lineaC[0].setPosition(355,230);
-        this.lineaC[0].setScale(0.15, 0.15);
 		this.addChild(this.lineaC[0], 1);
         this.lineaC[0].setVisible(false);
         
         this.lineaC[1] = new cc.Sprite(res.O_png);
         this.lineaC[1].setPosition(480, 230);
-        this.lineaC[1].setScale(0.15, 0.15);
 		this.addChild(this.lineaC[1], 1);
         this.lineaC[1].setVisible(false);
         
         this.lineaC[2] = new cc.Sprite(res.O_png);
         this.lineaC[2].setPosition(610, 230);
-        this.lineaC[2].setScale(0.15, 0.15);
 		this.addChild(this.lineaC[2], 1);
         this.lineaC[2].setVisible(false);
         
-        var boton = new cc.Sprite(res.boton_png);
-        boton.setPosition(480, 80);
-        this.addChild(boton, 3);
+        this.boton = new cc.Sprite(res.boton_png);
+        this.boton.setPosition(480, 80);
+        this.addChild(this.boton, 3);
         //========================================================================
         
         // Touch Event
